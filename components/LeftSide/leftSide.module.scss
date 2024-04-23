@@ -1,0 +1,135 @@
+.contentWrapper {
+  align-items: start;
+  border: 1px solid #20190E;
+  background-color: #0f0f0f;
+  display: flex;
+  max-width: 588px;
+  margin-right: 10px;
+  flex-direction: column;
+  padding: 26px 24px;
+}
+@media (max-width: 991px) {
+  .contentWrapper {
+    padding: 0 20px;
+  }
+}
+.contentInner {
+  align-self: stretch;
+}
+@media (max-width: 991px) {
+  .contentInner {
+    max-width: 100%;
+  }
+}
+.contentColumns {
+  gap: 20px;
+  display: flex;
+}
+@media (max-width: 991px) {
+  .contentColumns {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0px;
+  }
+}
+.imageColumn {
+  display: flex;
+  flex-direction: column;
+  line-height: normal;
+  width: 58%;
+  margin-left: 0px;
+}
+@media (max-width: 991px) {
+  .imageColumn {
+    width: 100%;
+  }
+}
+.responsiveImage {
+  aspect-ratio: 1;
+  object-fit: auto;
+  object-position: center;
+  width: 100%;
+}
+@media (max-width: 991px) {
+  .responsiveImage {
+    margin-top: 24px;
+  }
+}
+.textColumn {
+  display: flex;
+  flex-direction: column;
+  line-height: normal;
+  width: 42%;
+  margin-left: 20px;
+}
+@media (max-width: 991px) {
+  .textColumn {
+    width: 100%;
+  }
+}
+
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.64);
+  font-weight: 400;
+  letter-spacing: 0.7px;
+  line-height: 22px;
+}
+@media (max-width: 991px) {
+  .textBlock {
+    margin-top: 24px;
+  }
+}
+.textHeader {
+  font-family: Poppins, sans-serif;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.06);
+  white-space: nowrap;
+  text-align: center;
+  text-transform: uppercase;
+  width: 22px;
+  height: 22px;
+}
+@media (max-width: 991px) {
+  .textHeader {
+    white-space: initial;
+  }
+}
+.textBody {
+  color: #fff;
+  letter-spacing: -0.48px;
+  margin-top: 8px;
+  margin-bottom: 20px;
+  font: 16px/24px Inter, sans-serif;
+}
+.actionPrompt {
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: url(../../public/headerbgs.png);
+  background-size: cover;
+  background-position: center;
+  backdrop-filter: blur(18.149999618530273px);
+  margin-top: 12px;
+  width: 300px;
+  max-width: 100%;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 16px 32px;
+  font: 400 16px/150% Poppins, -apple-system, Roboto, Helvetica, sans-serif;
+}
+@media (max-width: 991px) {
+  .actionPrompt {
+    padding: 0 20px;
+  }
+}
+.actionNote {
+  color: #fff;
+  letter-spacing: -0.36px;
+  margin-top: 8px;
+  font: 400 12px/167% Inter, -apple-system, Roboto;
+}

@@ -1,0 +1,208 @@
+.componentContainer {
+  background-color: #0f0f0f;
+  display: flex;
+  max-width: 588px;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 10px;
+}
+.infoSection {
+  background-color: rgba(0, 0, 0, 0.25);
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding: 24px;
+}
+@media (max-width: 991px) {
+  .infoSection {
+    max-width: 100%;
+    padding: 0 20px;
+  }
+}
+.infoWrapper {
+  /* No styles given for .div-3 */
+}
+@media (max-width: 991px) {
+  .infoWrapper {
+    max-width: 100%;
+  }
+}
+.flexContainer {
+  gap: 20px;
+  display: flex;
+}
+@media (max-width: 991px) {
+  .flexContainer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0px;
+  }
+}
+.imageColumn {
+  display: flex;
+  flex-direction: column;
+  line-height: normal;
+  width: 58%;
+  margin-left: 0px;
+}
+@media (max-width: 991px) {
+  .imageColumn {
+    width: 100%;
+  }
+}
+.imageWrapper {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+@media (max-width: 991px) {
+  .imageWrapper {
+    margin-top: 24px;
+  }
+}
+.imageContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 1;
+  width: 100%;
+  font-size: 14px;
+  white-space: nowrap;
+  letter-spacing: 0.7px;
+  line-height: 157%;
+  padding: 4px 0 80px;
+}
+@media (max-width: 991px) {
+  .imageContainer {
+    white-space: initial;
+  }
+}
+.mainImage {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.statusOverlay {
+  position: relative;
+  justify-content: center;
+//   background-color: #1a1a1a;
+  display: flex;
+  width: 121px;
+  margin-bottom: auto;
+  top: 0px;
+  gap: 8px;
+  padding: 8px 16px;
+}
+@media (max-width: 991px) {
+  .statusOverlay {
+    margin-bottom: 40px;
+    white-space: initial;
+    padding: 0 20px;
+  }
+}
+.statusIcon {
+  aspect-ratio: 1;
+  object-fit: auto;
+  object-position: center;
+  width: 24px;
+}
+.statusText {
+  font-family: Poppins, sans-serif;
+  background: linear-gradient(
+    94deg,
+    rgba(255, 255, 255, 0.4) -1.07%,
+    #fff 53.25%,
+    rgba(255, 255, 255, 0.4) 104.41%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.availability {
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(174, 174, 174, 0.06) 51%,
+    rgba(153, 153, 153, 0) 100%
+  );
+  backdrop-filter: blur(18.149999618530273px);
+  margin-top: 12px;
+  color: var(--Whitek-W-32, rgba(255, 255, 255, 0.32));
+  text-align: center;
+  letter-spacing: 0.8px;
+  padding: 16px 32px;
+  font: 16px/150% Poppins, sans-serif;
+}
+@media (max-width: 991px) {
+  .availability {
+    padding: 0 20px;
+  }
+}
+.detailsColumn {
+  display: flex;
+  flex-direction: column;
+  line-height: normal;
+  width: 42%;
+  margin-left: 20px;
+}
+@media (max-width: 991px) {
+  .detailsColumn {
+    width: 100%;
+  }
+}
+.detailsList {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: var(--Whitek-W-64, rgba(255, 255, 255, 0.64));
+  font-weight: 400;
+  letter-spacing: 0.7px;
+  line-height: 22px;
+}
+@media (max-width: 991px) {
+  .detailsList {
+    margin-top: 24px;
+  }
+}
+.listItemHeader {
+  font-family: Poppins, sans-serif;
+  justify-content: center;
+  background-color: var(--Whitek-W-6, rgba(255, 255, 255, 0.06));
+  white-space: nowrap;
+  text-align: center;
+  text-transform: uppercase;
+  width: 22px;
+  height: 22px;
+}
+@media (max-width: 991px) {
+  .listItemHeader {
+    white-space: initial;
+  }
+}
+.listItemText {
+  color: var(--Black-B-64, #5c5c5c);
+  letter-spacing: -0.48px;
+  margin-top: 8px;
+  font: 16px/24px Inter, sans-serif;
+  margin-bottom: 20px;
+}
+.launchDate {
+  color: var(--Black-B-64, #5c5c5c);
+  letter-spacing: -0.54px;
+  margin-top: 12px;
+  font: 400 18px/144% Inter, -apple-system, Roboto, Helvetica, sans-serif;
+}
+@media (max-width: 991px) {
+  .launchDate {
+    max-width: 100%;
+  }
+}
