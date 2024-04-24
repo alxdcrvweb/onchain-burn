@@ -20,13 +20,13 @@ export class GalleryStore {
       this.char = null;
     }
   };
-  removeToken = (id:string) => {
-    let i = this.characters.findIndex((object) => {
-      return object.id == id;
-    });
-    console.log(this.characters, i, this.characters.splice(i, 1));
-    this.characters = this.characters.splice(i, 1);
+  removeToken = (id: string) => {
+    let index = this.characters.findIndex((object) => object.id === id);
+    if (index !== -1) { 
+      this.characters.splice(index, 1);
+    }
   }
+  
   getCharacters = async (address: string, chain: string) => {
     console.log(address, "hiii");
     const params = {

@@ -6,9 +6,9 @@ import { burnContract, burnAbi } from "../utils/contracts/burn";
 import { ModalsEnum } from "../modals";
 import { injectable } from "inversify";
 import BN from "bignumber.js";
-import { toast } from "react-toastify";
-import { toBNJS } from "../utils/utilities";
+import types from "../utils/pillTypes.json";
 import { mintAbi, mintContract } from "../utils/contracts/mint";
+import { toast } from "react-toastify";
 interface User {
   login: string;
   email: string;
@@ -46,6 +46,39 @@ export class Web3Store {
   setInitConnect = (status: boolean) => {
     this.isInitConnect = status;
   };
+  approveForBurn = async () => {
+    const isApproved = await this.mint?.methods
+      .isApprovedForAll(this.address, burnContract)
+      .call();
+    try {
+      if (!isApproved) {
+        const res = await this.mint.methods
+          .setApprovalForAll(burnContract, true)
+          .send({ from: this.address });
+        return res;
+      } else return true;
+    } catch (e: any) {
+      console.log(e);
+      if (e?.message?.includes("Cannot set properties")) {
+        toast.error("Please confirm transaction", { theme: "dark" });
+      } else {
+        toast.error(e?.message, { theme: "dark" });
+      }
+    }
+  };
+  burn = async (id: string, data: any) => {
+    try {
+      const type = types[Number(id) - 1].type;
+      console.log(id, data, type);
+      await this.contract.methods.burnToMint(id, type, data).send({
+        from: this.address,
+      });
+      return true;
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
+  };
   setProvider = (provider?: any, address?: string) => {
     if (address) {
       this.setInitConnect(true);
@@ -56,20 +89,9 @@ export class Web3Store {
       // this.checked = true;
       // console.log("CONNECT");
       this.web3 = new Web3(provider);
-      this.contract = new this.web3.eth.Contract(
-        burnAbi as any,
-        burnContract
-      );
+      this.contract = new this.web3.eth.Contract(burnAbi as any, burnContract);
       this.mint = new this.web3.eth.Contract(mintAbi as any, mintContract);
       this.subscribeProvider();
-    }
-  };
-  getPrice = async () => {
-    try {
-      const res = await this.contract.methods.price().call();
-      this.price = res;
-    } catch (e) {
-      console.log(e);
     }
   };
 
@@ -82,110 +104,6 @@ export class Web3Store {
       console.log(e);
     }
   };
-  
-  whitelistBuy = async (amount: number) => {
-    try {
-      const buy = await this.contract?.methods.whitelistBuy(amount).send({
-        from: this.address,
-        value: toBNJS(this.price).multipliedBy(amount).toString(),
-      });
-
-      return buy;
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  publicBuy = async () => {
-    try {
-      const buy = await this.contract?.methods.publicBuy().send({
-        from: this.address,
-        value: toBNJS(this.price).toString(),
-      });
-
-      return buy;
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  pillBuy = async () => {
-    try {
-      const buy = await this.contract?.methods.pillBuy().send({
-        from: this.address,
-        value: toBNJS(this.price).toString(),
-      });
-
-      return buy;
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  setAmounts = async () => {
-    try {
-      const minted = await this.mint.methods.balanceOf(this.address).call();
-      const res = await this.contract.methods
-        .allowedToMintDuringWhitelistPhase(this.address)
-        .call();
-      const purPills = await this.contract.methods
-        .purchasedDuringPillPhase(this.address)
-        .call();
-      const purPublic = await this.contract.methods
-        .purchasedDuringPublicPhase(this.address)
-        .call();
-      const pur = await this.contract.methods
-        .purchasedDuringWhitelistPhase(this.address)
-        .call();
-      console.log(minted);
-      this.fromWhitelisted = Number(res) - Number(pur);
-      this.fromPills = (Number(minted) > 0 ? 1 : 0) - Number(purPills);
-      this.fromPublic = 1 - Number(purPublic);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  setPills = async () => {
-    try {
-      const res = await this.contract.methods
-        .allowedToMintDuringWhitelistPhase(this.address)
-        .call();
-      const res2 = await this.contract.methods
-        .purchasedDuringWhitelistPhase(this.address)
-        .call();
-      this.fromWhitelisted = Number(res) - Number(res2);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  getLimits = async () => {
-    try {
-      const lim = await this.contract.methods.totalLimit().call();
-      const pur = await this.contract.methods.totalPurchased().call();
-      this.myLimits = { pur: pur, lim: lim };
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  getWlLimits = async () => {
-    try {
-      const lim = await this.contract.methods.whitelistPhaseLimit().call();
-      const pur = await this.contract.methods.totalPurchased().call();
-      this.wlLimit = pur + " / " + lim;
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  getPresaleStage = async () => {
-    try {
-      const pill = await this.contract.methods.isPillPhase().call();
-      const pub = await this.contract.methods.isPublicPhase().call();
-      const wl = await this.contract.methods.isWhitelistPhase().call();
-      console.log(pill, pub, wl);
-      if (pill) this.presaleStage = "pill";
-      if (pub) this.presaleStage = "public";
-      if (wl) this.presaleStage = "whitelist";
-    } catch (e) {
-      console.log(e);
-    }
-  };
 
   setConnected = (connected: boolean) => {
     if (!this.contract) {
@@ -194,10 +112,7 @@ export class Web3Store {
         "https://endpoints.omniatech.io/v1/base/mainnet/public"
       );
 
-      this.contract = new this.web3.eth.Contract(
-        burnAbi as any,
-        burnContract
-      );
+      this.contract = new this.web3.eth.Contract(burnAbi as any, burnContract);
       this.mint = new this.web3.eth.Contract(mintAbi as any, mintContract);
     }
   };

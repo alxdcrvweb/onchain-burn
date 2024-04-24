@@ -11,7 +11,9 @@
 }
 @media (max-width: 991px) {
   .contentWrapper {
+    margin-right: 0px;
     padding: 0 20px;
+    align-items: center;
   }
 }
 .contentInner {
@@ -123,14 +125,15 @@
   padding: 16px 32px;
   font: 400 16px/150% Poppins, -apple-system, Roboto, Helvetica, sans-serif;
 }
-@media (max-width: 991px) {
-  .actionPrompt {
-    padding: 0 20px;
-  }
-}
+
 .actionNote {
   color: #fff;
   letter-spacing: -0.36px;
   margin-top: 8px;
   font: 400 12px/167% Inter, -apple-system, Roboto;
+}
+@media (max-width: 991px) {
+  .actionNote {
+    margin-bottom: 20px;
+  }
 }

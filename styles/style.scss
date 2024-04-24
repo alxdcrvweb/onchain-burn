@@ -6,7 +6,8 @@
 @import "ui";
 
 body {
-  // overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   background: rgb(0, 0, 0);
   // background: lightcoral;
   color: $mainColor;
