@@ -32,7 +32,6 @@ const Main: FC = observer((props) => {
       const res = await axios.get("/api/roots?id=" + id);
       web3store.approveForBurn().then(() => {
         web3store.burn(id, res.data).then((res) => {
-          console.log(res);
           if (res) {
             galleryStore.removeToken(id);
 
