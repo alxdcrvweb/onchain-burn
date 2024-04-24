@@ -12,6 +12,19 @@
     padding: 0 0px;
   }
 }
+.containerConnect {
+  align-items: center;
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
+  @media (max-width: 991px) {
+    padding: 0 0px;
+  }
+}
 .modal__name {
   font-size: 12px;
   font-weight: 400;

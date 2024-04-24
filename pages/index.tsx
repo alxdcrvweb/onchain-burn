@@ -50,7 +50,7 @@ const Main: FC = observer((props) => {
   return (
     <>
       {!web3store.address ? (
-        <div className={styles.container}>
+        <div className={styles.containerConnect}>
           <ConnectButtonCustom />
         </div>
       ) : !modal ? (
