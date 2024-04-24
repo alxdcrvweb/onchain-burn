@@ -9,20 +9,20 @@ function RightSide() {
             <div className={style.flexContainer}>
               <div className={style.imageColumn}>
                 <div className={style.imageWrapper}>
+                  <div className={style.statusOverlay}>
+                    <img
+                      loading="lazy"
+                      src="../lock.svg"
+                      className={style.statusIcon}
+                    />
+                    <div className={style.statusText}>Locked</div>
+                  </div>
                   <div className={style.imageContainer}>
                     <img
                       loading="lazy"
-                      src="https://cdn.builder.io/api/v1/image/assets/TEMP/3f46daee1c1dd8559dbfedaef174e360ee2e1692be6c8bc321f09e254a86e51b?"
+                      src="../chains.svg"
                       className={style.mainImage}
                     />
-                    <div className={style.statusOverlay}>
-                      <img
-                        loading="lazy"
-                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/7b5c6b15644be4c6979859a37380b87d946a3f46a35b547cbaf785ab2c99d2fe?"
-                        className={style.statusIcon}
-                      />
-                      <div className={style.statusText}>Locked</div>
-                    </div>
                   </div>
                   <div className={style.availability}>Available later</div>
                 </div>

@@ -2,7 +2,7 @@ import { action, makeObservable, observable } from "mobx";
 import "reflect-metadata";
 import Web3 from "web3";
 import { RootStore } from "./RootStore";
-import { presaleContract, presaleAbi } from "../utils/contracts/presale";
+import { burnContract, burnAbi } from "../utils/contracts/burn";
 import { ModalsEnum } from "../modals";
 import { injectable } from "inversify";
 import BN from "bignumber.js";
@@ -57,8 +57,8 @@ export class Web3Store {
       // console.log("CONNECT");
       this.web3 = new Web3(provider);
       this.contract = new this.web3.eth.Contract(
-        presaleAbi as any,
-        presaleContract
+        burnAbi as any,
+        burnContract
       );
       this.mint = new this.web3.eth.Contract(mintAbi as any, mintContract);
       this.subscribeProvider();
@@ -195,8 +195,8 @@ export class Web3Store {
       );
 
       this.contract = new this.web3.eth.Contract(
-        presaleAbi as any,
-        presaleContract
+        burnAbi as any,
+        burnContract
       );
       this.mint = new this.web3.eth.Contract(mintAbi as any, mintContract);
     }

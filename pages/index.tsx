@@ -6,26 +6,25 @@ import { Web3Store } from "../stores/Web3Store";
 import ConnectButtonCustom from "../components/Header/connectButtonCustom";
 import LeftSide from "../components/LeftSide/leftSide";
 import RightSide from "../components/RightSide/rightSide";
+import { GalleryStore } from "../stores/GalleryStore";
+import { chainId } from "../config/config";
 const Main: FC = observer((props) => {
   const web3store = useInjection(Web3Store);
+  const galleryStore = useInjection(GalleryStore);
   const [modal, setModal] = useState(false);
   useEffect(() => {
     if (web3store.address) {
-      web3store.getPrice();
-      web3store.getPresaleStage();
-      web3store.getLimits();
+      galleryStore.getCharacters(web3store.address, chainId).then((res) => {
+        galleryStore.setCharacters(res ? res : []);
+      });
     }
   }, [web3store.address]);
   useEffect(() => {
     if (web3store.address) {
-      web3store.setAmounts();
+      // web3store.setAmounts();
     }
   }, [web3store.address]);
-  console.log(
-    web3store.presaleStage,
-    web3store.fromWhitelisted,
-    web3store.fromPills
-  );
+
   const chose = () => {
     setModal(true);
   };
@@ -48,7 +47,9 @@ const Main: FC = observer((props) => {
         </div>
       ) : (
         <div className={styles.modal}>
-
+          {galleryStore.characters.map((el, i) => {
+            return <div key={i}>{el.id}</div>;
+          })}
         </div>
       )}
     </>
