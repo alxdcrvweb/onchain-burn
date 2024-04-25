@@ -51,7 +51,7 @@ const Main: FC = observer((props) => {
     if (galleryStore.characters.length == 0)
       return toast.error("You don't have any pills");
     if (isWhitelist && galleryStore.recepts.length == 0)
-      return toast.error("You don't have any recepts");
+      return toast.error("You don't have any prescriptions");
     if (isPaused) return toast.error("Contract is paused");
     router.push("/burn");
   };

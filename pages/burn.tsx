@@ -31,7 +31,7 @@ const Burn: FC = observer((props) => {
           if (res) {
             galleryStore.removeToken(id);
 
-            toast.success("Burned successfully");
+            toast.success("Choice success");
           }
         });
       });
