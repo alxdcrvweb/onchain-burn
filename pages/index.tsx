@@ -14,12 +14,18 @@ const Main: FC = observer((props) => {
   const web3store = useInjection(Web3Store);
   const galleryStore = useInjection(GalleryStore);
   const [isWhitelist, setWhitelist] = useState(true);
+  const [isPaused, setPaused] = useState(true);
+
   const router = useRouter();
-  useEffect(() => {
+  const check = () => {
     if (web3store.address) {
       web3store?.checkWl().then((res) => {
         console.log(res, "whitelist");
         setWhitelist(res);
+      });
+      web3store?.checkPause().then((res) => {
+        console.log(res, "whitelist");
+        setPaused(res);
       });
       galleryStore.getCharacters(web3store.address, chainId).then((res) => {
         galleryStore.setCharacters(res ? res : []);
@@ -28,20 +34,12 @@ const Main: FC = observer((props) => {
         galleryStore.setRecepts(res ? res : []);
       });
     }
+  };
+  useEffect(() => {
+    check();
   }, [web3store.address]);
   useEffect(() => {
-    if (web3store.address) {
-      web3store?.checkWl().then((res) => {
-        console.log(res, "whitelist");
-        setWhitelist(res);
-      });
-      galleryStore.getCharacters(web3store.address, chainId).then((res) => {
-        galleryStore.setCharacters(res ? res : []);
-      });
-      galleryStore.getRecepts(web3store.address, chainId).then((res) => {
-        galleryStore.setRecepts(res ? res : []);
-      });
-    }
+    check();
   }, []);
   useEffect(() => {
     if (web3store.address) {
@@ -54,6 +52,7 @@ const Main: FC = observer((props) => {
       return toast.error("You don't have any pills");
     if (isWhitelist && galleryStore.recepts.length == 0)
       return toast.error("You don't have any recepts");
+    if (isPaused) return toast.error("Contract is paused");
     router.push("/burn");
   };
   return (

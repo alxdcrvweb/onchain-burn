@@ -46,6 +46,17 @@ export class Web3Store {
   setInitConnect = (status: boolean) => {
     this.isInitConnect = status;
   };
+  checkPause = async () => {
+    try {
+      const res = await this.contract.methods
+        .paused()
+        .call();
+      return res;
+    } catch (e) {
+      console.log(e);
+      // return false;
+    }
+  };
   checkWl = async () => {
     try {
       const res = await this.contract.methods
