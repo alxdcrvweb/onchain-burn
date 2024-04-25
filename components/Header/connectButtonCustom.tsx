@@ -15,16 +15,15 @@ const ConnectButtonCustom = observer(
       setCorrectChain,
       setProvider,
       isInitConnect,
-      address,
-      farcasterUser,
+      address
     } = useInjection(Web3Store);
 
     const router = useRouter();
     useEffect(() => {
-      if (router.asPath.includes("connect") && (address || farcasterUser)) {
+      if (router.asPath.includes("connect") && (address)) {
         router.push("/");
       }
-    }, [address, farcasterUser, router.asPath]);
+    }, [address, router.asPath]);
 
     return (
       <ConnectButton.Custom>

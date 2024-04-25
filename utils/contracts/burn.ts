@@ -1,8 +1,9 @@
-export const burnContract = "0x059e634AFF2a3946f5741143243222dee32c5887";
+export const burnContract = "0x5Fedf9dBBEF6ac7cbDFcC0E7Ca89e35D75CfBae6";
 export const burnAbi = [
   {
     inputs: [
       { internalType: "address", name: "_pills", type: "address" },
+      { internalType: "address", name: "_prescriptionPass", type: "address" },
       { internalType: "bytes32", name: "_root", type: "bytes32" },
       { internalType: "string", name: "_name", type: "string" },
       { internalType: "string", name: "_symbol", type: "string" },
@@ -151,6 +152,13 @@ export const burnAbi = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "disableWhitelist",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     inputs: [{ internalType: "uint256", name: "tokenId", type: "uint256" }],
     name: "getApproved",
     outputs: [{ internalType: "address", name: "", type: "address" }],
@@ -163,6 +171,13 @@ export const burnAbi = [
       { internalType: "address", name: "operator", type: "address" },
     ],
     name: "isApprovedForAll",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "isWhitelistPhase",
     outputs: [{ internalType: "bool", name: "", type: "bool" }],
     stateMutability: "view",
     type: "function",
@@ -215,6 +230,13 @@ export const burnAbi = [
     outputs: [
       { internalType: "contract IBurnable", name: "", type: "address" },
     ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "prescriptionPass",
+    outputs: [{ internalType: "contract IERC721", name: "", type: "address" }],
     stateMutability: "view",
     type: "function",
   },

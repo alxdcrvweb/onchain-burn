@@ -46,6 +46,17 @@ export class Web3Store {
   setInitConnect = (status: boolean) => {
     this.isInitConnect = status;
   };
+  checkWl = async () => {
+    try {
+      const res = await this.contract.methods
+        .isWhitelistPhase()
+        .call();
+      return res;
+    } catch (e) {
+      console.log(e);
+      // return false;
+    }
+  };
   approveForBurn = async () => {
     const isApproved = await this.mint?.methods
       .isApprovedForAll(this.address, burnContract)

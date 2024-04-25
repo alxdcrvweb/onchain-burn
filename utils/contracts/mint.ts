@@ -1,4 +1,5 @@
 export const mintContract = "0xbeEb44E43901670602A5119E0710D3c13B133689";
+export const receptContract = "0x0ddb74c6ec31c102962fa3042c37693a8c39260f";
 export const mintAbi = [
     {
       inputs: [

@@ -8,6 +8,7 @@ injectable();
 
 export class GalleryStore {
   @observable characters: any[] = [];
+  @observable recepts: any[] = [];
   @observable char: any;
   @observable takenNft: any;
   constructor(private readonly rootStore: RootStore) {
@@ -20,13 +21,44 @@ export class GalleryStore {
       this.char = null;
     }
   };
+  getRecepts = async (address: string, chain: string) => {
+    const params = {
+      chain: chain,
+      address: address,
+    };
+
+    const query = new URLSearchParams(params).toString();
+
+    try {
+      const res = await axios.get("/api/recepts?" + query);
+      console.log(res, res.data.result.length);
+
+      return Promise.all(
+        res.data.result
+          .filter((el: any) => el.token_uri)
+          .map(async (el: any) => {
+            console.log(el);
+            return {
+              block_number: el.block_number,
+              id: el.token_id,
+              ...el.normalized_metadata,
+            };
+          })
+      );
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  setRecepts = (recepts: any[]) => {
+    this.recepts = recepts;
+  };
   removeToken = (id: string) => {
     let index = this.characters.findIndex((object) => object.id === id);
-    if (index !== -1) { 
+    if (index !== -1) {
       this.characters.splice(index, 1);
     }
-  }
-  
+  };
+
   getCharacters = async (address: string, chain: string) => {
     console.log(address, "hiii");
     const params = {
