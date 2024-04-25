@@ -47,7 +47,7 @@ const Burn: FC = observer((props) => {
         <div className={styles.containerConnect}>
           <ConnectButtonCustom />
         </div>
-      ):(
+      ) : (
         <div className={styles.container}>
           <div className={styles.modal}>
             {galleryStore.characters.map((el, i) => {
@@ -59,7 +59,10 @@ const Burn: FC = observer((props) => {
                   onClick={() => startBurn(el.id)}
                 >
                   <img src={"/api/image?cid=" + el?.image} />
-                  <div className={styles.modal__name}>{el?.name}</div>
+                  <div className={styles.div}>
+                    <div className={styles.div2}>{el?.name}</div>
+                    <div className={styles.div3}>burn</div>
+                  </div>
                 </div>
               );
             })}
