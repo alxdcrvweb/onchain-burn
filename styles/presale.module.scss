@@ -49,6 +49,10 @@
   letter-spacing: 0.7px;
   font: 14px/143% Poppins, sans-serif;
 }
+.modal__blocked {
+  opacity: 0.5;
+  pointer-events: none;
+}
 .modal__name {
   font-size: 12px;
   font-weight: 400;

@@ -8,6 +8,7 @@ import { GalleryStore } from "../stores/GalleryStore";
 import { chainId } from "../config/config";
 import axios from "axios";
 import { toast } from "react-toastify";
+import classNames from "classnames";
 const Burn: FC = observer((props) => {
   const web3store = useInjection(Web3Store);
   const galleryStore = useInjection(GalleryStore);
@@ -23,23 +24,7 @@ const Burn: FC = observer((props) => {
       // web3store.setAmounts();
     }
   }, [web3store.address]);
-  const startBurn = async (id: string) => {
-    try {
-      const res = await axios.get("/api/roots?id=" + id);
-      web3store.approveForBurn().then(() => {
-        web3store.burn(id, res.data).then((res) => {
-          if (res) {
-            galleryStore.removeToken(id);
 
-            toast.success("Choice success");
-          }
-        });
-      });
-      console.log(res.data);
-    } catch (e) {
-      console.log(e);
-    }
-  };
 
   return (
     <>
@@ -55,7 +40,7 @@ const Burn: FC = observer((props) => {
               return (
                 <div
                   key={i}
-                  className={styles.modal__pill}
+                  className={classNames(styles.modal__pill, blocked ==  styles.modal__blocked)}
                   onClick={() => startBurn(el.id)}
                 >
                   <img src={"/api/image?cid=" + el?.image} />
