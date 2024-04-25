@@ -9,6 +9,7 @@ import { chainId } from "../config/config";
 import axios from "axios";
 import { toast } from "react-toastify";
 import classNames from "classnames";
+import BurnCard from "../components/burn/burnCard";
 const Burn: FC = observer((props) => {
   const web3store = useInjection(Web3Store);
   const galleryStore = useInjection(GalleryStore);
@@ -25,7 +26,6 @@ const Burn: FC = observer((props) => {
     }
   }, [web3store.address]);
 
-
   return (
     <>
       {!web3store.address ? (
@@ -37,19 +37,7 @@ const Burn: FC = observer((props) => {
           <div className={styles.modal}>
             {galleryStore.characters.map((el, i) => {
               console.log(el);
-              return (
-                <div
-                  key={i}
-                  className={classNames(styles.modal__pill, blocked ==  styles.modal__blocked)}
-                  onClick={() => startBurn(el.id)}
-                >
-                  <img src={"/api/image?cid=" + el?.image} />
-                  <div className={styles.div}>
-                    <div className={styles.div2}>{el?.name}</div>
-                    <div className={styles.div3}>burn</div>
-                  </div>
-                </div>
-              );
+              return <BurnCard key={i} el={el} />;
             })}
             {galleryStore.characters.length == 0 && (
               <div className={styles.modal__empty}>No pills to use</div>

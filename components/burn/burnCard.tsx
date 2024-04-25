@@ -7,7 +7,7 @@ import { GalleryStore } from "../../stores/GalleryStore";
 import { Web3Store } from "../../stores/Web3Store";
 import axios from "axios";
 import { toast } from "react-toastify";
-const BurnCard = observer(({ burnCard }: { burnCard: any }) => {
+const BurnCard = observer(({ el }: { el: any }) => {
   const [blocked, setBlocked] = useState(false);
   const galleryStore = useInjection(GalleryStore);
   const web3store = useInjection(Web3Store);
@@ -19,12 +19,15 @@ const BurnCard = observer(({ burnCard }: { burnCard: any }) => {
         web3store.burn(id, res.data).then((res) => {
           if (res) {
             galleryStore.removeToken(id);
-
+            setBlocked(false);
             toast.success("Choice success");
+          } else {
+            setBlocked(false);
+            toast.error("Error");
           }
         });
       });
-      setBlocked(false);
+
       console.log(res.data);
     } catch (e) {
       setBlocked(false);
@@ -37,11 +40,11 @@ const BurnCard = observer(({ burnCard }: { burnCard: any }) => {
         styles.modal__pill,
         blocked && styles.modal__blocked
       )}
-      onClick={() => startBurn(burnCard.id)}
+      onClick={() => startBurn(el.id)}
     >
-      <img src={"/api/image?cid=" + burnCard?.image} />
+      <img src={"/api/image?cid=" + el?.image} />
       <div className={styles.div}>
-        <div className={styles.div2}>{burnCard?.name}</div>
+        <div className={styles.div2}>{el?.name}</div>
         <div className={styles.div3}>burn</div>
       </div>
     </div>
