@@ -31,6 +31,20 @@ const Main: FC = observer((props) => {
   }, [web3store.address]);
   useEffect(() => {
     if (web3store.address) {
+      web3store?.checkWl().then((res) => {
+        console.log(res, "whitelist");
+        setWhitelist(res);
+      });
+      galleryStore.getCharacters(web3store.address, chainId).then((res) => {
+        galleryStore.setCharacters(res ? res : []);
+      });
+      galleryStore.getRecepts(web3store.address, chainId).then((res) => {
+        galleryStore.setRecepts(res ? res : []);
+      });
+    }
+  }, []);
+  useEffect(() => {
+    if (web3store.address) {
       // web3store.setAmounts();
     }
   }, [web3store.address]);
