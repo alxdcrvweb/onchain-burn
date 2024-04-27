@@ -64,9 +64,11 @@
   line-height: normal;
   width: 42%;
   margin-left: 20px;
+  margin-bottom: -100px;
 }
 @media (max-width: 991px) {
   .textColumn {
+    margin-bottom: 0;
     width: 100%;
   }
 }
