@@ -66,7 +66,7 @@ const Main: FC = observer((props) => {
           <div className={styles.chose}>
             <div className={styles.chose_w}>Choose wisely</div>
             <a
-              href="https://opensea.io/collection/onchain-pills-2"
+              href="https://paragraph.xyz/@lama/onchain-pills"
               target="_blank"
             >
               <div className={styles.chose_pill}>

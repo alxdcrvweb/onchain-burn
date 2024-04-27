@@ -1,7 +1,6 @@
 import * as React from "react";
 import style from "./leftSide.module.scss";
-function LeftSide({chose}:{chose:any}) {
-  
+function LeftSide({ chose }: { chose: any }) {
   return (
     <>
       <section className={style.contentWrapper}>
@@ -10,7 +9,7 @@ function LeftSide({chose}:{chose:any}) {
             <div className={style.imageColumn}>
               <img
                 loading="lazy"
-                src='../../pill.png'
+                src="../../pill.png"
                 className={style.responsiveImage}
               />
             </div>
@@ -18,10 +17,15 @@ function LeftSide({chose}:{chose:any}) {
               <div className={style.textBlock}>
                 <div className={style.textHeader}>1</div>
                 <div className={style.textBody}>
-                  Pfp traits rarity depends on: <br />— pills traits— line of
-                  choice makers*{" "}
+                  Prescription Holders have opportunity to make this choice
+                  earlier than others.
                 </div>
                 <div className={style.textHeader}>2</div>
+                <div className={style.textBody}>
+                  Rarity of PFP traits depends on: <br />— Traits of your pill{" "}
+                  <br />— The earlier you make choice in favour of PFP
+                </div>
+                <div className={style.textHeader}>3</div>
                 <div className={style.textBody}>
                   Pfp holders stay participants of onchain ecosystem after token
                   launch{" "}
@@ -30,7 +34,9 @@ function LeftSide({chose}:{chose:any}) {
             </div>
           </div>
         </article>
-        <div className={style.actionPrompt} onClick={chose}>choose pfp</div>
+        <div className={style.actionPrompt} onClick={chose}>
+          choose pfp
+        </div>
         <div className={style.actionNote}>
           *The earlier you choose pfp, the rarer traits it will hold.{" "}
         </div>

@@ -36,7 +36,7 @@ function RightSide() {
                   <div className={style.listItemHeader}>2</div>
                   <div className={style.listItemText}>
                     To get a token bag, you will need to burn your pill after
-                    launch
+                    launch on a given day.
                   </div>
                   <div className={style.listItemHeader}>3</div>
                   <div className={style.listItemText}>
