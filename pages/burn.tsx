@@ -10,9 +10,11 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import classNames from "classnames";
 import BurnCard from "../components/burn/burnCard";
+import { useRouter } from "next/router";
 const Burn: FC = observer((props) => {
   const web3store = useInjection(Web3Store);
   const galleryStore = useInjection(GalleryStore);
+  const router = useRouter();
   useEffect(() => {
     if (web3store.address) {
       galleryStore.getCharacters(web3store.address, chainId).then((res) => {
@@ -34,6 +36,15 @@ const Burn: FC = observer((props) => {
         </div>
       ) : (
         <div className={styles.container}>
+          <div className={styles.chose}>
+            <div className={styles.chose_w}>Choose wisely</div>
+            <a href="https://paragraph.xyz/@lama/onchain-pills" target="_blank">
+              <div className={styles.chose_pill}>
+                go to pills traits details
+              </div>
+            </a>
+          </div>
+          <div className={styles.upper} onClick={()=>router.push('/')}>{"< back"}</div>
           <div className={styles.modal}>
             {galleryStore.characters.map((el, i) => {
               console.log(el);

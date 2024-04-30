@@ -78,16 +78,30 @@
     }
   }
 }
+.upper {
+  color: #a9a9a9;
+  text-align: left;
+  font-family: 'Poppins';
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 275;
+  padding-left: 70px;
+  line-height: 56px; /* 311.111% */
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
+  width: 100%;
+  cursor: pointer;
+}
 .modal {
-  background-color: #1a1a1a;
+  // background-color: #1a1a1a;
   width: 90vw;
   min-height: 480px;
-  padding-top: 30px;
+  padding-top: 13px;
   padding-left: 13px;
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
-  margin-top: 60px;
+  margin-top: 0px;
 }
 .chose {
   display: flex;
@@ -130,14 +144,8 @@
 }
 .chose_pill {
   justify-content: center;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.06) 51%,
-    rgba(153, 153, 153, 0) 100%
-  );
-  backdrop-filter: blur(18.149999618530273px);
+  background-image: url(../public/traits.svg);
+  
   text-align: center;
   letter-spacing: 0.8px;
   color: #fff;
