@@ -48,12 +48,12 @@ const Main: FC = observer((props) => {
   }, [web3store.address]);
 
   const chose = () => {
-    if (galleryStore.characters.length == 0)
-      return toast.error("You don't have any pills");
-    if (isWhitelist && galleryStore.recepts.length == 0)
-      return toast.error("You don't have any prescriptions");
-    if (isPaused) return toast.error("Contract is paused");
-    router.push("/burn");
+    // if (galleryStore.characters.length == 0)
+    //   return toast.error("You don't have any pills");
+    // if (isWhitelist && galleryStore.recepts.length == 0)
+    //   return toast.error("You don't have any prescriptions");
+    // if (isPaused) return toast.error("Contract is paused");
+    // router.push("/burn");
   };
   return (
     <>

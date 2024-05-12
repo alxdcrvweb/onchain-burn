@@ -35,7 +35,7 @@ function LeftSide({ chose }: { chose: any }) {
           </div>
         </article>
         <div className={style.actionPrompt} onClick={chose}>
-          choose pfp
+          PFP (13.05 6PM UTC)
         </div>
         <div className={style.actionNote}>
           *The earlier you choose pfp, the rarer traits it will hold.{" "}

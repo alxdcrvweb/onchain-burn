@@ -47,7 +47,7 @@ function RightSide() {
               </div>
             </div>
           </div>
-          <div className={style.launchDate}>Date: tba, after launch</div>
+          <div className={style.launchDate}>Date: 1.06</div>
         </div>
       </div>
       <style jsx>{`
