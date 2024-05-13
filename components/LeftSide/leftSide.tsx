@@ -1,6 +1,24 @@
 import * as React from "react";
 import style from "./leftSide.module.scss";
+import Timer from "./timer";
+import { timeToMint } from "../../config/config";
 function LeftSide({ chose }: { chose: any }) {
+  // const [time, setTime] = useState('00.00.00')
+  const [timerEnd, setTimerEnd] = React.useState<number>(1);
+
+  
+  // const timeToMint = 1709060400000
+  React.useEffect(() => {
+    let interval = setInterval(() => {
+      setTimerEnd(
+        timeToMint - Date.now()
+      );
+    }, 1000);
+    return () => {
+      clearInterval(interval);
+      // clearTimeout(tt);
+    };
+  }, []);
   return (
     <>
       <section className={style.contentWrapper}>
@@ -34,8 +52,8 @@ function LeftSide({ chose }: { chose: any }) {
             </div>
           </div>
         </article>
-        <div className={style.actionPrompt} onClick={chose}>
-          PFP (13.05 6PM UTC)
+        <div className={style.actionPrompt} onClick={() => timerEnd > 0 ? console.log('not yet') : chose()}>
+         {timerEnd > 0 ? <Timer/> : 'BURN'}
         </div>
         <div className={style.actionNote}>
           *The earlier you choose pfp, the rarer traits it will hold.{" "}
