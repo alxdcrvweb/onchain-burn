@@ -7,7 +7,7 @@ import { ModalsEnum } from "../modals";
 import { injectable } from "inversify";
 import BN from "bignumber.js";
 import types from "../utils/pillTypes.json";
-import { mintAbi, mintContract } from "../utils/contracts/mint";
+import { mintAbi, mintContract, receptContract } from "../utils/contracts/mint";
 import { toast } from "react-toastify";
 interface User {
   login: string;
@@ -27,6 +27,7 @@ export class Web3Store {
   @observable signer?: any | null = undefined;
   @observable contract?: any = undefined;
   @observable mint?: any = undefined;
+  @observable mint2?: any = undefined;
   @observable correctChain: boolean = false;
   @observable connected: boolean = false;
   @observable unsupported?: boolean = false;
@@ -36,6 +37,8 @@ export class Web3Store {
   @observable price: string = "";
   @observable fromWhitelisted: number = 0;
   @observable fromPills: number = 0;
+  @observable balancePills: number = 0;
+  @observable balanceRecept: number = 0;
   @observable fromPublic: number = 0;
   public constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
@@ -48,9 +51,7 @@ export class Web3Store {
   };
   checkPause = async () => {
     try {
-      const res = await this.contract.methods
-        .paused()
-        .call();
+      const res = await this.contract.methods.paused().call();
       return res;
     } catch (e) {
       console.log(e);
@@ -59,9 +60,7 @@ export class Web3Store {
   };
   checkWl = async () => {
     try {
-      const res = await this.contract.methods
-        .isWhitelistPhase()
-        .call();
+      const res = await this.contract.methods.isWhitelistPhase().call();
       return res;
     } catch (e) {
       console.log(e);
@@ -88,6 +87,16 @@ export class Web3Store {
       }
     }
   };
+  getTabletsCount = async () => {
+    try {
+      const balanceOf = await this.mint.methods.balanceOf(this.address).call();
+      const balanceOfR = await this.mint2.methods.balanceOf(this.address).call();
+      this.balancePills = balanceOf;
+      this.balanceRecept = balanceOfR
+    } catch (e) {
+      console.log(e);
+    }
+  };
   burn = async (id: string, data: any) => {
     try {
       const type = types[Number(id) - 1].type;
@@ -112,6 +121,8 @@ export class Web3Store {
       // console.log("CONNECT");
       this.web3 = new Web3(provider);
       this.contract = new this.web3.eth.Contract(burnAbi as any, burnContract);
+      this.mint2 = new this.web3.eth.Contract(mintAbi as any, receptContract);
+
       this.mint = new this.web3.eth.Contract(mintAbi as any, mintContract);
       this.subscribeProvider();
     }
@@ -135,6 +146,8 @@ export class Web3Store {
       );
 
       this.contract = new this.web3.eth.Contract(burnAbi as any, burnContract);
+      this.mint2 = new this.web3.eth.Contract(mintAbi as any, receptContract);
+
       this.mint = new this.web3.eth.Contract(mintAbi as any, mintContract);
     }
   };

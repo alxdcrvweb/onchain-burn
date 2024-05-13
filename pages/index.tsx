@@ -27,12 +27,13 @@ const Main: FC = observer((props) => {
         console.log(res, "whitelist");
         setPaused(res);
       });
-      galleryStore.getCharacters(web3store.address, chainId).then((res) => {
-        galleryStore.setCharacters(res ? res : []);
-      });
-      galleryStore.getRecepts(web3store.address, chainId).then((res) => {
-        galleryStore.setRecepts(res ? res : []);
-      });
+      // galleryStore.getCharacters(web3store.address, chainId).then((res) => {
+      //   galleryStore.setCharacters(res ? res : []);
+      // });
+      // galleryStore.getRecepts(web3store.address, chainId).then((res) => {
+      //   galleryStore.setRecepts(res ? res : []);
+      // });
+      web3store.getTabletsCount()
     }
   };
   useEffect(() => {
@@ -48,9 +49,9 @@ const Main: FC = observer((props) => {
   }, [web3store.address]);
 
   const chose = () => {
-    if (galleryStore.characters.length == 0)
+    if (web3store.balancePills == 0)
       return toast.error("You don't have any pills");
-    if (isWhitelist && galleryStore.recepts.length == 0)
+    if (isWhitelist && web3store.balanceRecept == 0)
       return toast.error("You don't have any prescriptions");
     if (isPaused) return toast.error("Contract is paused");
     router.push("/burn");
