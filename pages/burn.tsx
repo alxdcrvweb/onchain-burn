@@ -5,7 +5,7 @@ import { useInjection } from "inversify-react";
 import { Web3Store } from "../stores/Web3Store";
 import ConnectButtonCustom from "../components/Header/connectButtonCustom";
 import { GalleryStore } from "../stores/GalleryStore";
-import { chainId } from "../config/config";
+import { chainId, timeToMint } from "../config/config";
 import axios from "axios";
 import { toast } from "react-toastify";
 import classNames from "classnames";
@@ -25,6 +25,9 @@ const Burn: FC = observer((props) => {
   useEffect(() => {
     if (web3store.address) {
       // web3store.setAmounts();
+      if (Date.now() < timeToMint) {
+        router.push("/");
+      }
     }
   }, [web3store.address]);
 
@@ -36,7 +39,9 @@ const Burn: FC = observer((props) => {
         </div>
       ) : (
         <div className={styles.container}>
-          <div className={styles.upper} onClick={()=>router.push('/')}>{"< back"}</div>
+          <div className={styles.upper} onClick={() => router.push("/")}>
+            {"< back"}
+          </div>
           <div className={styles.chose_burn}>
             <div className={styles.chose_w}>Choose wisely</div>
             <a href="https://paragraph.xyz/@lama/onchain-pills" target="_blank">
@@ -45,12 +50,13 @@ const Burn: FC = observer((props) => {
               </div>
             </a>
           </div>
-          
+
           <div className={styles.modal}>
             {galleryStore.characters.map((el, i) => {
-              console.log(el);
+              // console.log(el);
               return <BurnCard key={i} el={el} />;
             })}
+            {/* <BurnCard key={1} el={{}} />; */}
             {galleryStore.characters.length == 0 && (
               <div className={styles.modal__empty}>No pills to use</div>
             )}

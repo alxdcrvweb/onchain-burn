@@ -37,6 +37,9 @@
   justify-content: space-between;
   padding: 7px 11px;
   margin-top: 12px;
+  @media (max-width: 551px) {
+    max-width: calc(100% - 20px);
+  }
 }
 .div2 {
   color: #fff;
@@ -109,6 +112,9 @@
   justify-content: flex-start;
   flex-wrap: wrap;
   margin-top: 0px;
+  @media (max-width: 700px) {
+    padding-left: 20px;
+  }
 }
 .chose {
   display: flex;
@@ -138,9 +144,9 @@
   margin-top: 10px;
   max-width: 1350px;
   padding-left: 70px;
-  text-align: center;
+  text-align: left;
 }
-@media (max-width: 991px) {
+@media (max-width: 700px) {
   .chose_burn {
     padding-left: 20px;
   }
