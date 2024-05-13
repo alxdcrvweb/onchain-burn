@@ -1,4 +1,4 @@
-export const burnContract = "0xf48Db4A9cc11017fD37c8B9586234874243dD7FD";
+export const burnContract = "0x5470dA6d5b35C4a0BE5243822db7CF6F861f13e6";
 export const burnAbi = [
   {
     inputs: [
