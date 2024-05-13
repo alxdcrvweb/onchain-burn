@@ -86,18 +86,25 @@
   font-style: normal;
   font-weight: 275;
   padding-left: 70px;
+  margin-top: 20px;
   line-height: 56px; /* 311.111% */
   letter-spacing: 0.9px;
   text-transform: uppercase;
+  max-width: 1350px;
   width: 100%;
   cursor: pointer;
+  @media (max-width: 700px) {
+    padding-left: 20px;
+    margin-top: 40px;
+  }
 }
 .modal {
   // background-color: #1a1a1a;
-  width: 90vw;
+  width: 100%;
+  max-width: 1350px;
   min-height: 480px;
   padding-top: 13px;
-  padding-left: 13px;
+  padding-left: 70px;
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
@@ -113,14 +120,29 @@
   width: 100%;
   padding-right: 60px;
   padding-bottom: 20px;
-  margin-top: 60px;
+  margin-top: 83px;
+  max-width: 1350px;
+  padding-left: 70px;
+  text-align: center;
+}
+.chose_burn {
+  display: flex;
+  gap: 20px;
+  color: var(--Whitek-W-100, #fff);
+  font-weight: 400;
+  text-transform: uppercase;
+  justify-content: space-between;
+  width: 100%;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  margin-top: 10px;
   max-width: 1350px;
   padding-left: 70px;
   text-align: center;
 }
 @media (max-width: 991px) {
-  .chose {
-    flex-wrap: wrap;
+  .chose_burn {
+    padding-left: 20px;
   }
 }
 .chose_w {
@@ -154,7 +176,9 @@
 }
 @media (max-width: 991px) {
   .chose_pill {
+    display: none;
     padding: 0 20px;
+    background-image: none;
   }
 }
 .stage {

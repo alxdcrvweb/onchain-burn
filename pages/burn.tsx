@@ -36,7 +36,8 @@ const Burn: FC = observer((props) => {
         </div>
       ) : (
         <div className={styles.container}>
-          <div className={styles.chose}>
+          <div className={styles.upper} onClick={()=>router.push('/')}>{"< back"}</div>
+          <div className={styles.chose_burn}>
             <div className={styles.chose_w}>Choose wisely</div>
             <a href="https://paragraph.xyz/@lama/onchain-pills" target="_blank">
               <div className={styles.chose_pill}>
@@ -44,7 +45,7 @@ const Burn: FC = observer((props) => {
               </div>
             </a>
           </div>
-          <div className={styles.upper} onClick={()=>router.push('/')}>{"< back"}</div>
+          
           <div className={styles.modal}>
             {galleryStore.characters.map((el, i) => {
               console.log(el);
