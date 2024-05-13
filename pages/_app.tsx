@@ -54,9 +54,9 @@ const connectors = connectorsForWallets(
 );
 const wagmiConfig = createConfig({
   connectors,
-  chains: [sepolia],
+  chains: [base],
   transports: {
-    [sepolia.id]: http(),
+    [base.id]: http(),
   },
 });
 // export async function getServerSideProps(context: any) {

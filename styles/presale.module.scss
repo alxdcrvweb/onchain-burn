@@ -30,15 +30,16 @@
   backdrop-filter: blur(10.449999809265137px);
   background-color: rgba(255, 255, 255, 0.06);
   display: flex;
-  max-width: 209px;
+  max-width: 220px;
   gap: 20px;
   font-weight: 400;
   text-transform: uppercase;
   justify-content: space-between;
   padding: 7px 11px;
+  margin-bottom: 12px;
   margin-top: 12px;
   @media (max-width: 551px) {
-    max-width: calc(100% - 20px);
+    max-width: calc(100%);
   }
 }
 .div2 {
@@ -68,8 +69,8 @@
   margin-right: 10px;
   cursor: pointer;
   img {
-    width: 210px;
-    height: 210px;
+    width: 220px;
+    height: 220px;
     border-radius: 10px;
     object-fit: cover;
   }
@@ -113,7 +114,10 @@
   flex-wrap: wrap;
   margin-top: 0px;
   @media (max-width: 700px) {
-    padding-left: 20px;
+    padding-left: 10px;
+    .modal__empty {
+      padding-left: 10px;
+    }
   }
 }
 .chose {

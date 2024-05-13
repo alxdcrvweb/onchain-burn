@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { observer } from "mobx-react";
 import styles from "../styles/presale.module.scss";
 import { useInjection } from "inversify-react";
@@ -14,6 +14,7 @@ import { useRouter } from "next/router";
 const Burn: FC = observer((props) => {
   const web3store = useInjection(Web3Store);
   const galleryStore = useInjection(GalleryStore);
+  const [blocked, setBlocked] = useState(false)
   const router = useRouter();
   useEffect(() => {
     if (web3store.address) {
@@ -25,12 +26,12 @@ const Burn: FC = observer((props) => {
   useEffect(() => {
     if (web3store.address) {
       // web3store.setAmounts();
-      if (Date.now() < timeToMint) {
-        router.push("/");
-      }
+      // if (Date.now() < timeToMint) {
+      //   router.push("/");
+      // }
     }
   }, [web3store.address]);
-
+  // console.log(galleryStore.characters);
   return (
     <>
       {!web3store.address ? (
@@ -54,8 +55,9 @@ const Burn: FC = observer((props) => {
           <div className={styles.modal}>
             {galleryStore.characters.map((el, i) => {
               // console.log(el);
-              return <BurnCard key={i} el={el} />;
+              return <BurnCard key={i} el={el} blocked={blocked} setBlocked={setBlocked}/>;
             })}
+            
             {/* <BurnCard key={1} el={{}} />; */}
             {galleryStore.characters.length == 0 && (
               <div className={styles.modal__empty}>No pills to use</div>
