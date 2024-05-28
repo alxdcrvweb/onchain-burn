@@ -1,6 +1,22 @@
 import * as React from "react";
 import style from "./rightSide.module.scss";
-function RightSide() {
+import style2 from "../LeftSide/leftSide.module.scss";
+
+import { timeToMint } from "../../config/config";
+import Timer from "../LeftSide/timer";
+function RightSide({ chose }: { chose: any }) {
+  const [timerEnd, setTimerEnd] = React.useState<number>(1);
+
+  // const timeToMint = 1709060400000
+  React.useEffect(() => {
+    let interval = setInterval(() => {
+      setTimerEnd(timeToMint - Date.now());
+    }, 1000);
+    return () => {
+      clearInterval(interval);
+      // clearTimeout(tt);
+    };
+  }, []);
   return (
     <>
       <div className={style.componentContainer}>
@@ -9,14 +25,14 @@ function RightSide() {
             <div className={style.flexContainer}>
               <div className={style.imageColumn}>
                 <div className={style.imageWrapper}>
-                  <div className={style.statusOverlay}>
+                  {/* <div className={style.statusOverlay}>
                     <img
                       loading="lazy"
                       src="../lock.svg"
                       className={style.statusIcon}
                     />
                     <div className={style.statusText}>Locked</div>
-                  </div>
+                  </div> */}
                   <div className={style.imageContainer}>
                     <img
                       loading="lazy"
@@ -24,7 +40,14 @@ function RightSide() {
                       className={style.mainImage}
                     />
                   </div>
-                  <div className={style.availability}>Available later</div>
+                  <div
+                    className={style2.actionPrompt}
+                    onClick={() =>
+                      timerEnd > 0 ? console.log("not yet") : chose()
+                    }
+                  >
+                    {timerEnd > 0 ? <Timer /> : "BURN"}
+                  </div>{" "}
                 </div>
               </div>
               <div className={style.detailsColumn}>

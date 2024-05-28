@@ -9,6 +9,7 @@ import BN from "bignumber.js";
 import types from "../utils/pillTypes.json";
 import { mintAbi, mintContract, receptContract } from "../utils/contracts/mint";
 import { toast } from "react-toastify";
+import { pillTokenBurnerAbi, pillTokenBurnerContract } from "../utils/contracts/pillTokenBurner";
 interface User {
   login: string;
   email: string;
@@ -26,6 +27,7 @@ export class Web3Store {
   @observable tokensList: any[] = [];
   @observable signer?: any | null = undefined;
   @observable contract?: any = undefined;
+  @observable contractBurnToken?: any = undefined;
   @observable mint?: any = undefined;
   @observable mint2?: any = undefined;
   @observable correctChain: boolean = false;
@@ -87,12 +89,35 @@ export class Web3Store {
       }
     }
   };
+  approveForBurnToken = async () => {
+    const isApproved = await this.mint?.methods
+      .isApprovedForAll(this.address, pillTokenBurnerContract)
+      .call();
+    try {
+      if (!isApproved) {
+        const res = await this.mint.methods
+          .setApprovalForAll(pillTokenBurnerContract, true)
+          .send({ from: this.address });
+        return res;
+      } else return true;
+    } catch (e: any) {
+      console.log(e);
+      if (e?.message?.includes("Cannot set properties")) {
+        toast.error("Please confirm transaction", { theme: "dark" });
+      } else {
+        toast.error(e?.message, { theme: "dark" });
+      }
+    }
+  };
   getTabletsCount = async () => {
     try {
       const balanceOf = await this.mint.methods.balanceOf(this.address).call();
-      const balanceOfR = await this.mint2.methods.balanceOf(this.address).call();
+      // const balanceOfR = await this.mint2.methods
+      //   .balanceOf(this.address)
+      //   .call();
       this.balancePills = balanceOf;
-      this.balanceRecept = balanceOfR
+      // this.balanceRecept = balanceOfR;
+      console.log(this.balancePills, this.balanceRecept);
     } catch (e) {
       console.log(e);
     }
@@ -102,6 +127,19 @@ export class Web3Store {
       const type = types[Number(id) - 1].type;
       console.log(id, data, type);
       await this.contract.methods.burnToMint(id, type, data).send({
+        from: this.address,
+      });
+      return true;
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
+  };
+  burnToken = async (id: string, data: any) => {
+    try {
+      const type = types[Number(id) - 1].type;
+      console.log(id, data, type);
+      await this.contractBurnToken.methods.burner(id, type, data).send({
         from: this.address,
       });
       return true;
@@ -121,8 +159,8 @@ export class Web3Store {
       // console.log("CONNECT");
       this.web3 = new Web3(provider);
       this.contract = new this.web3.eth.Contract(burnAbi as any, burnContract);
+      this.contractBurnToken = new this.web3.eth.Contract(pillTokenBurnerAbi as any, pillTokenBurnerContract);
       this.mint2 = new this.web3.eth.Contract(mintAbi as any, receptContract);
-
       this.mint = new this.web3.eth.Contract(mintAbi as any, mintContract);
       this.subscribeProvider();
     }

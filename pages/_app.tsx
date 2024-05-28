@@ -54,9 +54,9 @@ const connectors = connectorsForWallets(
 );
 const wagmiConfig = createConfig({
   connectors,
-  chains: [base],
+  chains: [sepolia],
   transports: {
-    [base.id]: http(),
+    [sepolia.id]: http(),
   },
 });
 // export async function getServerSideProps(context: any) {
@@ -82,7 +82,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
           <Provider container={container}>
             <WagmiProvider config={wagmiConfig}>
               <QueryClientProvider client={queryClient}>
-                <RainbowKitProvider initialChain={base}>
+                <RainbowKitProvider initialChain={sepolia}>
                   <Suspense fallback={<h1>Loading posts...</h1>}>
                     {/* <Rotate /> */}
                     <Head>

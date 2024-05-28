@@ -1,4 +1,6 @@
-export const mintContract = "0x6E230533d53e2F8fb90C542F02E5fa306b1Fe1d3";
+// export const mintContract = "0x6E230533d53e2F8fb90C542F02E5fa306b1Fe1d3";
+export const mintContract = "0x67928fa96bdd0e1e82958b0919ea6448d07735c6";
+
 export const receptContract = "0x0c8d5740650dc5777074ec407f705b0b7d444171";
 export const mintAbi = [
     {

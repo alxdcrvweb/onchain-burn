@@ -19,14 +19,14 @@ const Main: FC = observer((props) => {
   const router = useRouter();
   const check = () => {
     if (web3store.address) {
-      web3store?.checkWl().then((res) => {
-        console.log(res, "whitelist");
-        setWhitelist(res);
-      });
-      web3store?.checkPause().then((res) => {
-        console.log(res, "whitelist");
-        setPaused(res);
-      });
+      // web3store?.checkWl().then((res) => {
+      //   console.log(res, "whitelist");
+      //   setWhitelist(res);
+      // });
+      // web3store?.checkPause().then((res) => {
+      //   console.log(res, "whitelist");
+      //   setPaused(res);
+      // });
       // galleryStore.getCharacters(web3store.address, chainId).then((res) => {
       //   galleryStore.setCharacters(res ? res : []);
       // });
@@ -56,6 +56,14 @@ const Main: FC = observer((props) => {
     if (isPaused) return toast.error("Contract is paused");
     router.push("/burn");
   };
+  const choseBurn = () => {
+    if (web3store.balancePills == 0)
+      return toast.error("You don't have any pills");
+    // if (isWhitelist && web3store.balanceRecept == 0)
+    //   return toast.error("You don't have any prescriptions");
+    // if (isPaused) return toast.error("Contract is paused");
+    router.push("/burn-token");
+  };
   return (
     <>
       {!web3store.address ? (
@@ -77,7 +85,7 @@ const Main: FC = observer((props) => {
           </div>
           <div className={styles.containerSide}>
             <LeftSide chose={chose} />
-            <RightSide />
+            <RightSide chose={choseBurn} />
           </div>
         </div>
       )}
