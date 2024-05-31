@@ -9,7 +9,10 @@ import BN from "bignumber.js";
 import types from "../utils/pillTypes.json";
 import { mintAbi, mintContract, receptContract } from "../utils/contracts/mint";
 import { toast } from "react-toastify";
-import { pillTokenBurnerAbi, pillTokenBurnerContract } from "../utils/contracts/pillTokenBurner";
+import {
+  pillTokenBurnerAbi,
+  pillTokenBurnerContract,
+} from "../utils/contracts/pillTokenBurner";
 interface User {
   login: string;
   email: string;
@@ -42,6 +45,7 @@ export class Web3Store {
   @observable balancePills: number = 0;
   @observable balanceRecept: number = 0;
   @observable fromPublic: number = 0;
+  @observable isPaused: boolean = false;
   public constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
   }
@@ -54,6 +58,7 @@ export class Web3Store {
   checkPause = async () => {
     try {
       const res = await this.contract.methods.paused().call();
+      this.isPaused = res;
       return res;
     } catch (e) {
       console.log(e);
@@ -159,7 +164,10 @@ export class Web3Store {
       // console.log("CONNECT");
       this.web3 = new Web3(provider);
       this.contract = new this.web3.eth.Contract(burnAbi as any, burnContract);
-      this.contractBurnToken = new this.web3.eth.Contract(pillTokenBurnerAbi as any, pillTokenBurnerContract);
+      this.contractBurnToken = new this.web3.eth.Contract(
+        pillTokenBurnerAbi as any,
+        pillTokenBurnerContract
+      );
       this.mint2 = new this.web3.eth.Contract(mintAbi as any, receptContract);
       this.mint = new this.web3.eth.Contract(mintAbi as any, mintContract);
       this.subscribeProvider();

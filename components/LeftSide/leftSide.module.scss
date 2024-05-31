@@ -24,6 +24,10 @@
     max-width: 100%;
   }
 }
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
 .contentColumns {
   gap: 20px;
   display: flex;

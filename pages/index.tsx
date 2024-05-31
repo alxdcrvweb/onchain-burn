@@ -38,6 +38,7 @@ const Main: FC = observer((props) => {
   };
   useEffect(() => {
     check();
+    web3store.checkPause()
   }, [web3store.address]);
   useEffect(() => {
     check();

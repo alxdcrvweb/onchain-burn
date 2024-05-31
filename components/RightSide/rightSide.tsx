@@ -4,9 +4,13 @@ import style2 from "../LeftSide/leftSide.module.scss";
 
 import { timeToMint } from "../../config/config";
 import Timer from "../LeftSide/timer";
-function RightSide({ chose }: { chose: any }) {
+import { observer } from "mobx-react";
+import { useInjection } from "inversify-react";
+import { Web3Store } from "../../stores/Web3Store";
+import classNames from "classnames";
+const RightSide = observer(({ chose }: { chose: any }) => {
   const [timerEnd, setTimerEnd] = React.useState<number>(1);
-
+  const web3store = useInjection(Web3Store)
   // const timeToMint = 1709060400000
   React.useEffect(() => {
     let interval = setInterval(() => {
@@ -41,7 +45,7 @@ function RightSide({ chose }: { chose: any }) {
                     />
                   </div>
                   <div
-                    className={style2.actionPrompt}
+                    className={classNames(style2.actionPrompt, web3store.isPaused && style2.disable)}
                     onClick={() =>
                       timerEnd > 0 ? console.log("not yet") : chose()
                     }
