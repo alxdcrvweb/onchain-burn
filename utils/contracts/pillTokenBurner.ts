@@ -1,5 +1,4 @@
-export const pillTokenBurnerContract =
-  "0xb2b900dfCfb5003187aBf3F7BFAF243994D2FF9C";
+export const pillTokenBurnerContract ="0x5c427F9648158a9A82511d638e27b43CeD5B9a56";
 export const pillTokenBurnerAbi = [
   {
     inputs: [
