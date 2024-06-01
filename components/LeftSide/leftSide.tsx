@@ -53,7 +53,7 @@ function LeftSide({ chose }: { chose: any }) {
           </div>
         </article>
         <div className={style.actionPrompt} onClick={() => timerEnd > 0 ? console.log('not yet') : chose()}>
-         {timerEnd > 0 ? <Timer/> : 'BURN'}
+         {timerEnd > 0 ? <Timer timeToMint={timeToMint}/> : 'BURN'}
         </div>
         <div className={style.actionNote}>
           *The earlier you choose pfp, the rarer traits it will hold.{" "}

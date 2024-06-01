@@ -1,6 +1,6 @@
 .contentWrapper {
   align-items: start;
-  border: 1px solid #20190E;
+  border: 1px solid #20190e;
   background-color: #0f0f0f;
   display: flex;
   max-width: 588px;
@@ -112,6 +112,9 @@
   margin-top: 8px;
   margin-bottom: 20px;
   font: 16px/24px Inter, sans-serif;
+}
+.actionPrompt2 {
+  align-self: center;
 }
 .actionPrompt {
   justify-content: center;

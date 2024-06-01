@@ -2,10 +2,8 @@ import { FC, RefObject, useEffect, useState } from "react";
 // styles
 import styles from "../../styles/firstStep.module.scss";
 import { getRandomIntInclusive } from "../../utils/utilities";
-import { timeToMint } from "../../config/config";
 
-
-const Timer = () => {
+const Timer = ({timeToMint}:{timeToMint:number}) => {
   const [timer, setTimer] = useState<string>("");
   useEffect(() => {
     getTimeRemaining();

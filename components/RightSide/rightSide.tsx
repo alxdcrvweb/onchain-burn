@@ -2,7 +2,7 @@ import * as React from "react";
 import style from "./rightSide.module.scss";
 import style2 from "../LeftSide/leftSide.module.scss";
 
-import { timeToMint } from "../../config/config";
+import { timeToBurn } from "../../config/config";
 import Timer from "../LeftSide/timer";
 import { observer } from "mobx-react";
 import { useInjection } from "inversify-react";
@@ -14,7 +14,7 @@ const RightSide = observer(({ chose }: { chose: any }) => {
   // const timeToMint = 1709060400000
   React.useEffect(() => {
     let interval = setInterval(() => {
-      setTimerEnd(timeToMint - Date.now());
+      setTimerEnd(timeToBurn - Date.now());
     }, 1000);
     return () => {
       clearInterval(interval);
@@ -45,12 +45,12 @@ const RightSide = observer(({ chose }: { chose: any }) => {
                     />
                   </div>
                   <div
-                    className={classNames(style2.actionPrompt, web3store.isPaused && style2.disable)}
+                    className={classNames(style2.actionPrompt2, style2.actionPrompt, web3store.isPaused && style2.disable)}
                     onClick={() =>
                       timerEnd > 0 ? console.log("not yet") : chose()
                     }
                   >
-                    {timerEnd > 0 ? <Timer /> : "BURN"}
+                    {timerEnd > 0 ? <Timer timeToMint={timeToBurn} /> : "BURN"}
                   </div>{" "}
                 </div>
               </div>
@@ -82,6 +82,6 @@ const RightSide = observer(({ chose }: { chose: any }) => {
       `}</style>
     </>
   );
-}
+})
 
 export default RightSide;
