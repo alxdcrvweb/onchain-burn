@@ -36,7 +36,7 @@ function LeftSide({ chose }: { chose: any }) {
                 <div className={style.textHeader}>1</div>
                 <div className={style.textBody}>
                   Prescription Holders have opportunity to make this choice
-                  earlier than others.
+                  earlier than others
                 </div>
                 <div className={style.textHeader}>2</div>
                 <div className={style.textBody}>
