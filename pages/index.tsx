@@ -54,7 +54,7 @@ const Main: FC = observer((props) => {
       return toast.error("You don't have any pills");
     // if (isWhitelist && web3store.balanceRecept == 0)
     //   return toast.error("You don't have any prescriptions");
-    if (isPaused) return toast.error("Contract is paused");
+    // if (isPaused) return toast.error("Contract is paused");
     router.push("/burn");
   };
   const choseBurn = () => {
